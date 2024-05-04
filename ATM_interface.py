@@ -40,7 +40,7 @@ if(pin==1234):
         print("1. Check balance")
         print("2. Withdraw")
         print("3. Deposit")
-        print("4. Tranfer")
+        print("4. Transfer")
         print("5. Transaction History")
         print("6. Quit")
         try:
