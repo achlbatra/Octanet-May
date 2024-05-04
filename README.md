@@ -29,6 +29,10 @@ This Python script simulates an ATM interface with various functionalities like 
 - Copy the provided code into a Python script (e.g., `atm_interface.py`).
 - Run the script in your preferred Python environment.
 
+## Note
+- The PIN for authentication is set to 1234 in this simulation. Modify this for actual usage.
+- The initial balance is set to $10,000. Adjust this value as needed.
+
 ## Contribution
 Contributions to enhance or extend the functionalities of this ATM interface script are welcome. Feel free to fork the repository, make modifications, and create a pull request.
 
