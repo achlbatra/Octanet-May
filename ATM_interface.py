@@ -14,6 +14,104 @@ Quit
 import time
 import datetime
 
+transaction_history=[]
+balance = 10000
+
+def withdrawal(transaction_history:list):
+    global balance
+    print("-"*25)
+    withdraw = int(input("Enter the amount to withdraw : $"))
+    if(withdraw>balance):
+        print("Insufficient Balance!")
+    else:
+        balance = balance - withdraw
+        d = datetime.date.today()
+        transaction_history.append(" Withdrawal  \n         Amount : {} \n         Balance : {} \n         Date : {}".format(withdraw,balance,d))
+        print("$",withdraw," debited from your account successfully.")
+        print("New balance : $",balance)
+
+def deposit(transaction_history:list):
+    global balance
+    print("-"*25)
+    deposit = int(input("Enter the amount to deposit : $"))
+    balance = balance + deposit
+    d = datetime.date.today()
+    transaction_history.append(" Deposit  \n         Amount : {} \n         Balance : {} \n         Date : {}".format(deposit,balance,d))
+    print("$",deposit," credited to your account successfully.")
+    print("New balance : $",balance)
+
+def upi(transaction_history: list):
+    global balance
+    username = input("Enter Recipient name : ")
+    upi = input("Enter UPI id : ")
+    upi_t = int(input("Enter the amount to transfer : $"))
+    if(upi_t>balance):
+        print("Insufficient Balance!")
+    else:
+        balance = balance - upi_t
+        d = datetime.date.today()
+        transaction_history.append("UPI Transfer \n         Recipient Name : {} \n         Recipient UPI : {}\n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,upi,upi_t,balance,d))
+        print("$",upi_t," tranferred to ",username," with UPI id : ",upi ," from your account successfully.")
+        print("New balance : $",balance)
+
+def account(transaction_history:list):
+    global balance
+    username = input("Enter Recipient name : ")
+    acc = int(input("Enter 10 digit Account Number : "))
+    acc_t = int(input("Enter the amount to transfer : $"))
+    if(acc_t>balance):
+        print("Insufficient Balance!")
+    else:
+        balance = balance - acc_t
+        d = datetime.date.today()
+        transaction_history.append("Account Transfer \n         Recipient Name : {} \n         Recipient Account No. : {} \n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,acc,acc_t,balance,d))
+        print("$",acc_t," tranferred to ",username," with Account No. : ",acc ," from your account successfully.")
+        print("New balance : $",balance)
+
+def phone(transaction_history:list):
+    global balance
+    username = input("Enter Recipient name : ")
+    phn = input("Enter Phone No. : ")
+    phn_t = int(input("Enter the amount to transfer : $"))
+    if(phn_t>balance):
+        print("Insufficient Balance!")
+    else:
+        balance = balance - phn_t
+        d = datetime.date.today()
+        transaction_history.append("Phone Tranfer \n         Recipient Name : {} \n         Recipient Phone No. : {} \n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,phn,phn_t,balance,d))
+        print("$",phn_t," tranferred to ",username," with Phone No. : ",phn ," from your account successfully.")
+        print("New balance : $",balance)
+
+def transfer(transaction_history: list):
+    global balance
+    print("-"*25)
+    print("1. UPI transfer")
+    print("2. Account Transfer")
+    print("3. Phone Transfer")
+    try:
+        opt_t = int(input("Choose transfer type : "))
+    except:
+        print("-"*25)
+        print("Invalid Choice! Please try again")
+        exit()
+    match(opt_t):
+        case 1:
+            upi(transaction_history)
+        case 2:
+            account(transaction_history)
+        case 3:
+            phone(transaction_history)
+
+def tran_history(transaction_history:list):
+    print("Transaction History".center(50,"-"))
+    print("|| # ||           Transaction           ||")
+    print("-"*50)
+    j=1
+    for i in transaction_history:
+        print("|| {} ||".format(j), i,)
+        j=j+1
+        print("-"*50)
+
 print("Please insert your card!")
 time.sleep(1)
 print("-----", end='')
@@ -27,9 +125,6 @@ time.sleep(1)
 print("-----")
 time.sleep(1)
 #wait for the user to insert ATM card
-
-balance = 10000
-transaction_history=[]
 
 pin = int(input("Enter 4 digit pin: "))
 if(pin==1234):
@@ -55,87 +150,16 @@ if(pin==1234):
             print("-"*25)
             print("Current Balance : $", balance)
         elif(opt==2):
-            print("-"*25)
-            withdraw = int(input("Enter the amount to withdraw : $"))
-            if(withdraw>balance):
-                print("Insufficient Balance!")
-            else:
-                balance = balance - withdraw
-                d = datetime.date.today()
-                transaction_history.append(" Withdrawal  \n         Amount : {} \n         Balance : {} \n         Date : {}".format(withdraw,balance,d))
-                print("$",withdraw," debited from your account successfully.")
-                print("New balance : $",balance)
+            withdrawal(transaction_history)
         elif(opt==3):
-            print("-"*25)
-            deposit = int(input("Enter the amount to deposit : $"))
-            balance = balance + deposit
-            d = datetime.date.today()
-            transaction_history.append(" Deposit  \n         Amount : {} \n         Balance : {} \n         Date : {}".format(deposit,balance,d))
-            print("$",deposit," credited to your account successfully.")
-            print("New balance : $",balance)
+            deposit(transaction_history)
         elif(opt==4):
-            print("-"*25)
-            print("1. UPI transfer")
-            print("2. Account Transfer")
-            print("3. Phone Transfer")
-            try:
-                opt_t = int(input("Choose transfer type : "))
-            except:
-                print("-"*25)
-                print("Invalid Choice! Please try again")
-                exit()
-            match(opt_t):
-                case 1:
-                    username = input("Enter Recipient name : ")
-                    upi = input("Enter UPI id : ")
-                    upi_t = int(input("Enter the amount to transfer : $"))
-                    if(upi_t>balance):
-                        print("Insufficient Balance!")
-                    else:
-                        balance = balance - upi_t
-                        d = datetime.date.today()
-                        transaction_history.append("UPI Transfer \n         Recipient Name : {} \n         Recipient UPI : {}\n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,upi,upi_t,balance,d))
-                        print("$",upi_t," tranferred to ",username," with UPI id : ",upi ," from your account successfully.")
-                        print("New balance : $",balance)
-                case 2:
-                    username = input("Enter Recipient name : ")
-                    acc = int(input("Enter 10 digit Account Number : "))
-                    acc_t = int(input("Enter the amount to transfer : $"))
-                    if(acc_t>balance):
-                        print("Insufficient Balance!")
-                    else:
-                        balance = balance - acc_t
-                        d = datetime.date.today()
-                        transaction_history.append("Account Transfer \n         Recipient Name : {} \n         Recipient Account No. : {} \n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,acc,acc_t,balance,d))
-                        print("$",acc_t," tranferred to ",username," with Account No. : ",acc ," from your account successfully.")
-                        print("New balance : $",balance)
-                case 3:
-                    username = input("Enter Recipient name : ")
-                    phn = input("Enter Phone No. : ")
-                    phn_t = int(input("Enter the amount to transfer : $"))
-                    if(phn_t>balance):
-                        print("Insufficient Balance!")
-                    else:
-                        balance = balance - phn_t
-                        d = datetime.date.today()
-                        transaction_history.append("Phone Tranfer \n         Recipient Name : {} \n         Recipient Phone No. : {} \n         Amount : {} \n         Balance : {} \n         Date : {}".format(username,phn,phn_t,balance,d))
-                        print("$",phn_t," tranferred to ",username," with Phone No. : ",phn ," from your account successfully.")
-                        print("New balance : $",balance)
+            transfer(transaction_history)
         elif(opt==5):
-            print("Transaction History".center(50,"-"))
-            print("|| # ||           Transaction           ||")
-            print("-"*50)
-            j=1
-            for i in transaction_history:
-                print("|| {} ||".format(j), i,)
-                j=j+1
-                print("-"*50)
+            tran_history(transaction_history)
         elif(opt==6):
             print("Thank you for visiting us!".center(50,"-"))
             x=0
-            
-
-
 else:
     print("Incorrect pin entered! Please try again.")
     
